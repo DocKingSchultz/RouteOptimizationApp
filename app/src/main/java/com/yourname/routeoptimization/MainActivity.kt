@@ -1,6 +1,8 @@
 package com.yourname.routeoptimization
 
 import android.os.Bundle
+import android.widget.Button
+import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -14,34 +16,32 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.yourname.routeoptimization.ui.theme.RouteOptimizationAppTheme
 
 class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            RouteOptimizationAppTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
+
+    // Load the native library
+    companion object {
+        init {
+            System.loadLibrary("RouteOptimizationAPI")  // Name without `lib` and `.so`
         }
     }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+    // Declare native function
+    external fun calculateDistance(address1: String, address2: String): Double
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    RouteOptimizationAppTheme {
-        Greeting("Android")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        // Example addresses
+        val address1 = "New York"
+        val address2 = "Los Angeles"
+
+
+        val button = findViewById<Button>(R.id.calculateButton)
+        val textView = findViewById<TextView>(R.id.textView)
+        button.setOnClickListener {
+            val result = calculateDistance("New York", "Los Angeles")
+            textView.text = "Distance: $result km"
+        }
+
     }
 }
+

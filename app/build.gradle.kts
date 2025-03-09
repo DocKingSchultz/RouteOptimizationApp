@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "com.yourname.routeoptimization"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.yourname.routeoptimization"
         minSdk = 23
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
