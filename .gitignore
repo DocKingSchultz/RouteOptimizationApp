@@ -1,0 +1,13 @@
+# Ignore build files and IDE settings
+.idea/
+.gradle/
+/build
+/app/build
+/captures
+/outputs
+/test-results
+local.properties
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
