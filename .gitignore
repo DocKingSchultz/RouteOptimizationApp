@@ -11,3 +11,9 @@ local.properties
 # Ignore OS-specific files
 .DS_Store
 Thumbs.db
+
+# Ignore all shared libraries inside jniLibs
+app/src/main/jniLibs/*.so
+
+# Keep track the folder structure
+!app/src/main/jniLibs/.gitkeep
